@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.linh.runtimepermission">
+
+    <application>
+        <activity
+            android:name=".screen.RequestRuntimePermissionActivity"
+            android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
+    </application>
+
+</manifest>
