@@ -9,8 +9,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import com.linh.runtimepermission.model.RequestPermissionResult;
 import com.linh.runtimepermission.model.RPermission;
+import com.linh.runtimepermission.model.RequestPermissionResult;
 import com.linh.runtimepermission.screen.RequestRuntimePermissionActivity;
 import com.linh.runtimepermission.util.Constant;
 import com.linh.runtimepermission.util.Extras;
@@ -140,8 +140,9 @@ public class RuntimePermissionHandler {
             return this;
         }
 
-        public void setIgnoreNeverAskAgain(boolean ignoreNeverAskAgain) {
+        public Builder setIgnoreNeverAskAgain(boolean ignoreNeverAskAgain) {
             this.ignoreNeverAskAgain = ignoreNeverAskAgain;
+            return this;
         }
 
         public RuntimePermissionHandler build() {

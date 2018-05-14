@@ -12,9 +12,9 @@ public class SharedPreferenceApi {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T get(String key, Class<T> clazz) {
-        if(!sharedPreferences.contains(key)){
-            return null;
+    public <T> T get(String key, Class<T> clazz, Object defaultValue) {
+        if (!sharedPreferences.contains(key)) {
+            return (T) defaultValue;
         }
         if (clazz == String.class) {
             return (T) sharedPreferences.getString(key, null);
@@ -32,7 +32,7 @@ public class SharedPreferenceApi {
 
     public <T> void put(String key, T data) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(data == null){
+        if (data == null) {
             editor.remove(key);
         }
         if (data instanceof String) {

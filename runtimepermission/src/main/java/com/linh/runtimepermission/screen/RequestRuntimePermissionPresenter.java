@@ -97,7 +97,7 @@ public class RequestRuntimePermissionPresenter
 
     @Override
     public boolean isPermissionRequestedBefore(RPermission permission) {
-        return sharedPreferenceApi.get(permission.getSharedPrefKey(), Boolean.class);
+        return sharedPreferenceApi.get(permission.getSharedPrefKey(), Boolean.class, false);
     }
 
     @Override
