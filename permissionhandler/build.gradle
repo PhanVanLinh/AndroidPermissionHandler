@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 26
+
+  defaultConfig {
+    minSdkVersion 19
+    targetSdkVersion 26
+    versionCode 1
+    versionName "1.0.0"
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    debug {
+      minifyEnabled false
+    }
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+ext {
+  bintrayRepo = 'PermissionHandler' // your repo name
+  bintrayName = 'permissionhandler' // has to be same as your library module name
+  publishedGroupId = 'com.linh' // your module package name
+  libraryName = 'PermissionHandler'
+  artifact = 'permissionhandler' // has to be same as your library module name
+  libraryDescription = 'A library which help you requestPermissionsInApp runtime permission on Android easier.'
+
+  siteUrl = 'https://github.com/PhanVanLinh/AndroidPermissionHandler'
+  gitUrl = 'https://github.com/PhanVanLinh/AndroidPermissionHandler.git'
+
+  libraryVersion = '1.0.0'
+  developerId = 'phanvanlinh94vn'
+  developerName = 'PhanVanLinh'
+  developerEmail = 'phanvanlinh.94vn@gmail.com'
+  licenseName = 'The Apache Software License, Version 2.0'
+  licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/numetriclabz/jcenter/master/installv.gradle'
+apply from: 'https://raw.githubusercontent.com/numetriclabz/jcenter/master/bintrayv.gradle'
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation 'com.android.support:appcompat-v7:26.1.0'
+  testImplementation 'junit:junit:4.12'
+}

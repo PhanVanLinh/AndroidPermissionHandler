@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/text_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="#000"
+        android:textSize="20sp"
+        tools:text="result"
+        />
+
+    <Button
+        android:id="@+id/button_test_granted_single_permission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test granted single permission"
+        />
+
+    <Button
+        android:id="@+id/button_test_denied_single_permission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test denied single permission"
+        />
+
+    <Button
+        android:id="@+id/button_test_granted_multiple_permission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test granted multiple permission"
+        />
+
+    <Button
+        android:id="@+id/button_test_denied_multiple_permission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test denied multiple permission"
+        />
+
+</LinearLayout>
