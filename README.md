@@ -53,6 +53,11 @@ new PermissionHandler.Builder(BasicSampleActivity.this, permissions)
             }
         }).build().request();
 ```
+
+### Flow
+Here is the current flow that I used for request runtime permission. If you see something which is not suitable, please suggest me
+![flow image](/flow.png)
+
 ### Sample
 Please check the [sample](/sample).  
 
