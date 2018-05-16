@@ -9,14 +9,6 @@ A library which help you request runtime permission on Android easier.
 
 ### Install
 ```groovy
-allprojects {
-    repositories {
-        ...
-        maven {
-            url  "https://dl.bintray.com/phanvanlinh94vn/PermissionHandler"
-        }
-    }
-}
 
 dependencies {
    ...
