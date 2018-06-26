@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.linh.androidpermissionhandler.constant.Constant;
 import com.linh.permissionhandler.PermissionHandler;
 import com.linh.permissionhandler.RequestPermissionListener;
-import com.linh.permissionhandler.model.RPermission;
+import com.linh.permissionhandler.model.RuntimePermission;
 import com.linh.permissionhandler.model.RequestPermissionResult;
 
 public class ComplexSampleActivity extends AppCompatActivity {
@@ -54,8 +54,8 @@ public class ComplexSampleActivity extends AppCompatActivity {
     }
 
     private void testGrantedSinglePermission() {
-        RPermission[] permissions = new RPermission[] {
-                new RPermission(Manifest.permission.ACCESS_COARSE_LOCATION,
+        RuntimePermission[] permissions = new RuntimePermission[] {
+                new RuntimePermission(Manifest.permission.ACCESS_COARSE_LOCATION,
                         "We need ACCESS_COARSE_LOCATION permission because ...")
         };
         new PermissionHandler.Builder(this, permissions).setAllowRequestDontAskAgainPermission(true)
@@ -72,8 +72,8 @@ public class ComplexSampleActivity extends AppCompatActivity {
     }
 
     private void testDeniedSinglePermission() {
-        RPermission[] permissions = new RPermission[] {
-                new RPermission(Manifest.permission.CALL_PHONE,
+        RuntimePermission[] permissions = new RuntimePermission[] {
+                new RuntimePermission(Manifest.permission.CALL_PHONE,
                         "We need CALL_PHONE permission because ...")
         };
         new PermissionHandler.Builder(this, permissions).setAllowRequestDontAskAgainPermission(true)
@@ -90,10 +90,10 @@ public class ComplexSampleActivity extends AppCompatActivity {
     }
 
     private void testGrantedMultiplePermission() {
-        RPermission[] permissions = new RPermission[] {
-                new RPermission(Manifest.permission.CAMERA,
+        RuntimePermission[] permissions = new RuntimePermission[] {
+                new RuntimePermission(Manifest.permission.CAMERA,
                         "We need camera permission because ..."),
-                new RPermission(Manifest.permission.GET_ACCOUNTS,
+                new RuntimePermission(Manifest.permission.GET_ACCOUNTS,
                         "We need account permission because ...")
         };
         new PermissionHandler.Builder(this, permissions).setAllowRequestDontAskAgainPermission(true)
@@ -110,10 +110,10 @@ public class ComplexSampleActivity extends AppCompatActivity {
     }
 
     private void testDeniedMultiplePermission() {
-        RPermission[] permissions = new RPermission[] {
-                new RPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        RuntimePermission[] permissions = new RuntimePermission[] {
+                new RuntimePermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         "We need WRITE_EXTERNAL_STORAGE permission because ..."),
-                new RPermission(Manifest.permission.SEND_SMS,
+                new RuntimePermission(Manifest.permission.SEND_SMS,
                         "We need SEND_SMS permission because ...")
         };
         new PermissionHandler.Builder(this, permissions).setAllowRequestDontAskAgainPermission(true)

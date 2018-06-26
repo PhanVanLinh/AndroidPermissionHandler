@@ -8,14 +8,14 @@ import android.content.pm.PackageManager;
  */
 
 public class RequestPermissionResult {
-    private RPermission[] permissions;
+    private RuntimePermission[] permissions;
 
-    public RequestPermissionResult(RPermission[] permissions) {
+    public RequestPermissionResult(RuntimePermission[] permissions) {
         this.permissions = permissions;
     }
 
     public boolean isAllGranted() {
-        for (RPermission permission : permissions) {
+        for (RuntimePermission permission : permissions) {
             if (permission.getResult() != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
@@ -24,7 +24,7 @@ public class RequestPermissionResult {
     }
 
     public boolean isAllDenied() {
-        for (RPermission permission : permissions) {
+        for (RuntimePermission permission : permissions) {
             if (permission.getResult() == PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
@@ -32,7 +32,7 @@ public class RequestPermissionResult {
         return true;
     }
 
-    public RPermission[] getPermissions() {
+    public RuntimePermission[] getPermissions() {
         return permissions;
     }
 }

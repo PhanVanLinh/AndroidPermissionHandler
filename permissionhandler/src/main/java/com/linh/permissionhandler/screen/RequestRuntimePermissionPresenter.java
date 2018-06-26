@@ -1,7 +1,7 @@
 package com.linh.permissionhandler.screen;
 
 import android.content.DialogInterface;
-import com.linh.permissionhandler.model.RPermission;
+import com.linh.permissionhandler.model.RuntimePermission;
 import com.linh.permissionhandler.util.SharedPreferenceApi;
 
 /**
@@ -23,11 +23,11 @@ public class RequestRuntimePermissionPresenter
     }
 
     @Override
-    public void start(RPermission[] unGrantedPermissions) {
+    public void start(RuntimePermission[] unGrantedPermissions) {
         handleRequest(unGrantedPermissions, ignoreDontAskAgain);
     }
 
-    private void handleRequest(final RPermission[] permissions, boolean ignoreDontAskAgain) {
+    private void handleRequest(final RuntimePermission[] permissions, boolean ignoreDontAskAgain) {
         if (hasDontAskAgainPermission(permissions)) {
             if (ignoreDontAskAgain) {
                 requestPermissionInSetting(permissions);
@@ -41,8 +41,8 @@ public class RequestRuntimePermissionPresenter
         requestPermissionInApp(permissions);
     }
 
-    private boolean hasShouldShowRationalePermission(RPermission[] permissions) {
-        for (RPermission permission : permissions) {
+    private boolean hasShouldShowRationalePermission(RuntimePermission[] permissions) {
+        for (RuntimePermission permission : permissions) {
             if (view.shouldShowPermissionRationale(permission.getPermission())) {
                 return true;
             }
@@ -50,13 +50,13 @@ public class RequestRuntimePermissionPresenter
         return false;
     }
 
-    private boolean hasDontAskAgainPermission(RPermission[] permissions) {
+    private boolean hasDontAskAgainPermission(RuntimePermission[] permissions) {
         return countDontAskAgainPermission(permissions) > 0;
     }
 
-    private int countDontAskAgainPermission(RPermission[] permissions) {
+    private int countDontAskAgainPermission(RuntimePermission[] permissions) {
         int count = 0;
-        for (RPermission permission : permissions) {
+        for (RuntimePermission permission : permissions) {
             if (!view.shouldShowPermissionRationale(permission.getPermission())
                     && isPermissionRequestedBefore(permission)) {
                 count++;
@@ -65,7 +65,7 @@ public class RequestRuntimePermissionPresenter
         return count;
     }
 
-    private void requestPermissionInSetting(RPermission[] permissions) {
+    private void requestPermissionInSetting(RuntimePermission[] permissions) {
         String rationale = buildRationaleMessage(permissions);
         if (rationale.isEmpty()) {
             view.requestPermissionInSetting();
@@ -79,7 +79,7 @@ public class RequestRuntimePermissionPresenter
         }
     }
 
-    private void requestPermissionInApp(final RPermission[] permissions) {
+    private void requestPermissionInApp(final RuntimePermission[] permissions) {
         if (hasShouldShowRationalePermission(permissions)) {
             String rationale = buildRationaleMessage(permissions);
             if (rationale.isEmpty()) {
@@ -98,21 +98,21 @@ public class RequestRuntimePermissionPresenter
     }
 
     @Override
-    public void markPermissionRequested(RPermission[] permissions) {
-        for (RPermission permission : permissions) {
+    public void markPermissionRequested(RuntimePermission[] permissions) {
+        for (RuntimePermission permission : permissions) {
             sharedPreferenceApi.put(permission.getSharedPrefKey(), true);
         }
     }
 
     @Override
-    public boolean isPermissionRequestedBefore(RPermission permission) {
+    public boolean isPermissionRequestedBefore(RuntimePermission permission) {
         return sharedPreferenceApi.get(permission.getSharedPrefKey(), Boolean.class, false);
     }
 
     @Override
-    public String buildRationaleMessage(RPermission[] permissions) {
+    public String buildRationaleMessage(RuntimePermission[] permissions) {
         StringBuilder rationale = new StringBuilder();
-        for (RPermission permission : permissions) {
+        for (RuntimePermission permission : permissions) {
             if (permission.getRationale() != null) {
                 if (rationale.length() > 0) {
                     rationale.append("\n");

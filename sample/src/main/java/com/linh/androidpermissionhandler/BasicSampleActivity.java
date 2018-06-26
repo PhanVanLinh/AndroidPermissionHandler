@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.linh.androidpermissionhandler.constant.Constant;
 import com.linh.permissionhandler.PermissionHandler;
 import com.linh.permissionhandler.RequestPermissionListener;
-import com.linh.permissionhandler.model.RPermission;
+import com.linh.permissionhandler.model.RuntimePermission;
 import com.linh.permissionhandler.model.RequestPermissionResult;
 
 public class BasicSampleActivity extends AppCompatActivity {
@@ -29,10 +29,10 @@ public class BasicSampleActivity extends AppCompatActivity {
     }
 
     private void requestContactAndCalendarPermission() {
-        RPermission[] permissions = new RPermission[] {
-                new RPermission(Manifest.permission.READ_CONTACTS,
+        RuntimePermission[] permissions = new RuntimePermission[] {
+                new RuntimePermission(Manifest.permission.READ_CONTACTS,
                         "We need READ_CONTACTS because ..."),
-                new RPermission(Manifest.permission.READ_CALENDAR,
+                new RuntimePermission(Manifest.permission.READ_CALENDAR,
                         "We need READ_CALENDAR because ...")
         };
         new PermissionHandler.Builder(BasicSampleActivity.this, permissions).setAllowRequestDontAskAgainPermission(
@@ -45,7 +45,7 @@ public class BasicSampleActivity extends AppCompatActivity {
                     tvResult.setText(Constant.ALL_PERMISSION_DENIED);
                 } else {
                     StringBuilder tmpResult = new StringBuilder();
-                    for (RPermission permission : result.getPermissions()) {
+                    for (RuntimePermission permission : result.getPermissions()) {
                         if (permission.getResult() == PackageManager.PERMISSION_GRANTED) {
                             tmpResult.append(permission.getPermission()).append("granted\n");
                         } else {

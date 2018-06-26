@@ -9,8 +9,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import com.linh.permissionhandler.model.RPermission;
 import com.linh.permissionhandler.model.RequestPermissionResult;
+import com.linh.permissionhandler.model.RuntimePermission;
 import com.linh.permissionhandler.screen.RequestRuntimePermissionActivity;
 import com.linh.permissionhandler.util.Constant;
 import com.linh.permissionhandler.util.Extras;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class PermissionHandler {
     private Context context;
-    private RPermission[] permissions;
+    private RuntimePermission[] permissions;
     @Nullable
     private RequestPermissionListener listener;
     private boolean allowRequestDontAskAgainPermission;
@@ -46,7 +46,7 @@ public class PermissionHandler {
             notifyAllPermissionGranted();
             return;
         }
-        RPermission[] unGrantedPermissions = findUnGrantedPermissions(permissions);
+        RuntimePermission[] unGrantedPermissions = findUnGrantedPermissions(permissions);
         if (unGrantedPermissions.length == 0) {
             notifyAllPermissionGranted();
             return;
@@ -63,33 +63,33 @@ public class PermissionHandler {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    private RPermission[] findGrantedPermissions(RPermission[] permissions) {
-        List<RPermission> grantedPermissions = new ArrayList<>();
-        for (RPermission permission : permissions) {
+    private RuntimePermission[] findGrantedPermissions(RuntimePermission[] permissions) {
+        List<RuntimePermission> grantedPermissions = new ArrayList<>();
+        for (RuntimePermission permission : permissions) {
             if (isPermissionGranted(permission.getPermission())) {
                 grantedPermissions.add(permission);
             }
         }
-        return grantedPermissions.toArray(new RPermission[0]);
+        return grantedPermissions.toArray(new RuntimePermission[0]);
     }
 
-    private RPermission[] findUnGrantedPermissions(RPermission[] permissions) {
-        List<RPermission> unGrantedPermissions = new ArrayList<>();
-        for (RPermission permission : permissions) {
+    private RuntimePermission[] findUnGrantedPermissions(RuntimePermission[] permissions) {
+        List<RuntimePermission> unGrantedPermissions = new ArrayList<>();
+        for (RuntimePermission permission : permissions) {
             if (!isPermissionGranted(permission.getPermission())) {
                 unGrantedPermissions.add(permission);
             }
         }
-        return unGrantedPermissions.toArray(new RPermission[0]);
+        return unGrantedPermissions.toArray(new RuntimePermission[0]);
     }
 
-    private void updatePermissionResult(RPermission[] permissions, int result) {
-        for (RPermission permission : permissions) {
+    private void updatePermissionResult(RuntimePermission[] permissions, int result) {
+        for (RuntimePermission permission : permissions) {
             permission.setResult(result);
         }
     }
 
-    private void requestUnGrantedPermissions(RPermission[] permissions,
+    private void requestUnGrantedPermissions(RuntimePermission[] permissions,
             boolean ignoreNeverAskAgain) {
         Intent intent = new Intent(context, RequestRuntimePermissionActivity.class);
         intent.putExtra(Extras.EXTRAS_PERMISSIONS, permissions);
@@ -125,11 +125,11 @@ public class PermissionHandler {
 
     public static class Builder {
         private Context context;
-        private RPermission[] permissions;
+        private RuntimePermission[] permissions;
         private RequestPermissionListener listener;
         private boolean allowRequestDontAskAgainPermission;
 
-        public Builder(Context context, @NonNull RPermission[] permissions) {
+        public Builder(Context context, @NonNull RuntimePermission[] permissions) {
             this.context = context;
             this.permissions = permissions;
         }
@@ -142,7 +142,8 @@ public class PermissionHandler {
         /**
          * When set allowRequestDontAskAgainPermission=true, we will open Settings to allow user enable permission
          */
-        public Builder setAllowRequestDontAskAgainPermission(boolean allowRequestDontAskAgainPermission) {
+        public Builder setAllowRequestDontAskAgainPermission(
+                boolean allowRequestDontAskAgainPermission) {
             this.allowRequestDontAskAgainPermission = allowRequestDontAskAgainPermission;
             return this;
         }

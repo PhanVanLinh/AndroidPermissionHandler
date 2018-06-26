@@ -17,10 +17,10 @@ dependencies {
 ```
 ### Usage
 ```java
-RPermission[] permissions = new RPermission[] {  
-        new RPermission(Manifest.permission.READ_CONTACTS,  
+RuntimePermission[] permissions = new RuntimePermission[] {  
+        new RuntimePermission(Manifest.permission.READ_CONTACTS,  
                 "We need READ_CONTACTS permission because ..."),
-        new RPermission(Manifest.permission.READ_CALENDAR, 
+        new RuntimePermission(Manifest.permission.READ_CALENDAR, 
         "Pass your rationale message OR simple pass null if you don't want to show rationale")           
 };  
 
@@ -34,7 +34,7 @@ new PermissionHandler.Builder(BasicSampleActivity.this, permissions)
                 } else if (result.isAllDenied()) {
                     // All requested permissions is denied
                 } else {
-                    for (RPermission permission : result.getPermissions()) {
+                    for (RuntimePermission permission : result.getPermissions()) {
                         if (permission.getResult() == PackageManager.PERMISSION_GRANTED) {
                             // This permission is granted
                         } else {

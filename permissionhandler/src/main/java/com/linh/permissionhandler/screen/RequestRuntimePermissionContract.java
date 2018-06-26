@@ -1,7 +1,7 @@
 package com.linh.permissionhandler.screen;
 
 import android.content.DialogInterface;
-import com.linh.permissionhandler.model.RPermission;
+import com.linh.permissionhandler.model.RuntimePermission;
 
 /**
  * Created by PhanVanLinh on 14/05/2018.
@@ -14,7 +14,7 @@ public interface RequestRuntimePermissionContract {
 
         void requestPermissionInSetting();
 
-        void requestPermissionsInApp(RPermission[] permissions);
+        void requestPermissionsInApp(RuntimePermission[] permissions);
 
         boolean shouldShowPermissionRationale(String permission);
 
@@ -23,12 +23,12 @@ public interface RequestRuntimePermissionContract {
 
     interface Presenter {
 
-        void start(RPermission[] unGrantedPermissions);
+        void start(RuntimePermission[] unGrantedPermissions);
 
-        boolean isPermissionRequestedBefore(RPermission permission);
+        boolean isPermissionRequestedBefore(RuntimePermission permission);
 
-        void markPermissionRequested(RPermission[] permissions);
+        void markPermissionRequested(RuntimePermission[] permissions);
 
-        String buildRationaleMessage(RPermission[] permissions);
+        String buildRationaleMessage(RuntimePermission[] permissions);
     }
 }

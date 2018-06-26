@@ -5,13 +5,13 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import com.linh.permissionhandler.util.Constant;
 
-public class RPermission implements Parcelable {
+public class RuntimePermission implements Parcelable {
     private String permission;
     @Nullable
     private String rationale;
     private int result = Constant.PERMISSION_UNKNOWN;
 
-    public RPermission(String permission, String rationale) {
+    public RuntimePermission(String permission, String rationale) {
         this.permission = permission;
         this.rationale = rationale;
     }
@@ -57,21 +57,21 @@ public class RPermission implements Parcelable {
         dest.writeInt(this.result);
     }
 
-    protected RPermission(Parcel in) {
+    protected RuntimePermission(Parcel in) {
         this.permission = in.readString();
         this.rationale = in.readString();
         this.result = in.readInt();
     }
 
-    public static final Creator<RPermission> CREATOR = new Creator<RPermission>() {
+    public static final Creator<RuntimePermission> CREATOR = new Creator<RuntimePermission>() {
         @Override
-        public RPermission createFromParcel(Parcel source) {
-            return new RPermission(source);
+        public RuntimePermission createFromParcel(Parcel source) {
+            return new RuntimePermission(source);
         }
 
         @Override
-        public RPermission[] newArray(int size) {
-            return new RPermission[size];
+        public RuntimePermission[] newArray(int size) {
+            return new RuntimePermission[size];
         }
     };
 }

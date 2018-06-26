@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.linh.permissionhandler.util.Constant;
-import com.linh.permissionhandler.model.RPermission;
+import com.linh.permissionhandler.model.RuntimePermission;
 import com.linh.permissionhandler.util.Extras;
 import com.linh.permissionhandler.util.SharedPreferenceApi;
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ public class RequestRuntimePermissionActivity extends AppCompatActivity
     private int REQUEST_PERMISSION_IN_APP = 100;
     private RequestRuntimePermissionContract.Presenter presenter;
     private boolean hasShowedRationale;
-    private RPermission[] unGrantedPermissions;
+    private RuntimePermission[] unGrantedPermissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         Parcelable[] parcelableArray = getIntent().getParcelableArrayExtra(Extras.EXTRAS_PERMISSIONS);
-        unGrantedPermissions = Arrays.copyOf(parcelableArray, parcelableArray.length, RPermission[].class);
+        unGrantedPermissions = Arrays.copyOf(parcelableArray, parcelableArray.length, RuntimePermission[].class);
         boolean ignoreDontAskAgain =
                 getIntent().getBooleanExtra(Extras.EXTRAS_IGNORE_NEVER_ASK_AGAIN, false);
 
@@ -53,7 +53,7 @@ public class RequestRuntimePermissionActivity extends AppCompatActivity
         return ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
     }
 
-    public void requestPermissionsInApp(RPermission[] permissions) {
+    public void requestPermissionsInApp(RuntimePermission[] permissions) {
         String[] permissionStr = new String[permissions.length];
         for (int i = 0, len = permissions.length; i < len; i++) {
             permissionStr[i] = permissions[i].getPermission();
@@ -108,7 +108,7 @@ public class RequestRuntimePermissionActivity extends AppCompatActivity
                 }
             }
             if (!isAllPermissionGranted && !hasShowedRationale) {
-                RPermission[] newUnGrantedPermissions = getNewUnGrantedPermissions();
+                RuntimePermission[] newUnGrantedPermissions = getNewUnGrantedPermissions();
                 if (!presenter.buildRationaleMessage(newUnGrantedPermissions).isEmpty()) {
                     presenter.start(newUnGrantedPermissions);
                     return;
@@ -126,15 +126,15 @@ public class RequestRuntimePermissionActivity extends AppCompatActivity
         }
     }
 
-    private RPermission[] getNewUnGrantedPermissions() {
-        List<RPermission> newUnGrantedPermissions = new ArrayList<>();
-        for (RPermission permission : unGrantedPermissions) {
+    private RuntimePermission[] getNewUnGrantedPermissions() {
+        List<RuntimePermission> newUnGrantedPermissions = new ArrayList<>();
+        for (RuntimePermission permission : unGrantedPermissions) {
             if (ActivityCompat.checkSelfPermission(this, permission.getPermission())
                     != PackageManager.PERMISSION_GRANTED) {
                 newUnGrantedPermissions.add(permission);
             }
         }
-        return newUnGrantedPermissions.toArray(new RPermission[0]);
+        return newUnGrantedPermissions.toArray(new RuntimePermission[0]);
     }
 
     @Override
