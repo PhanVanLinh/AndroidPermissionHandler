@@ -99,17 +99,18 @@ public class PermissionHandler {
     }
 
     private void registerBroadcast() {
-        BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 updatePermissionResult(findGrantedPermissions(permissions),
                         PackageManager.PERMISSION_GRANTED);
                 notifyPermissionResult();
+                context.unregisterReceiver(this);
             }
         };
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.REQUEST_RUNTIME_PERMISSION_ACTION);
-        context.registerReceiver(mReceiver, filter);
+        context.registerReceiver(receiver, filter);
     }
 
     private void notifyAllPermissionGranted() {
